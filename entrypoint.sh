@@ -1,4 +1,5 @@
 #!/bin/bash
 
-stm32cubeide --launcher.suppressErrors -nosplash -application org.eclipse.cdt.managedbuilder.core.headlessbuild -data /tmp/stm-workspace -import "$1"
-headless-build.sh -data /tmp/stm-workspace -build "$2"
+SRC_ROOT=$1
+cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -G Ninja  -S ${SRC_ROOT} -B ${SRC_ROOT}/docker-cmake-build-debug
+cmake --build ${SRC_ROOT}/docker-cmake-build-debug --target all
